@@ -76,15 +76,15 @@ formCreate.addEventListener("submit", (e) => {
     }
 });
 // UPDATE ////
-function updateStudent(index, student) {
-    const students = getStudentsFromStorage();
-    students[index] = student;
-    setStudentsToStorage(students);
-}
-formUpdate.addEventListener("submit", (e) => {
-    e.preventDefault();
-    console.log("form editted");
-});
+// function updateStudent(index: number, student: Student) {
+// 	const students = getStudentsFromStorage();
+// 	students[index] = student;
+// 	setStudentsToStorage(students);
+// }
+// formUpdate.addEventListener("submit", (e) => {
+// 	e.preventDefault();
+// 	console.log("form editted");
+// });
 // DELETE ////
 function deleteStudent(index) {
     const students = getStudentsFromStorage();
@@ -97,7 +97,6 @@ function deleteStudent(index) {
 // 4. Table Mapping Function:
 function mapStudentsToTable(students) {
     const tbody = document.getElementById("student-table-body");
-    console.log(students);
     tbody.innerHTML = ""; // Clear existing data
     students.forEach((student, index) => {
         const row = document.createElement("tr");
@@ -112,13 +111,7 @@ function mapStudentsToTable(students) {
 		<td>${student === null || student === void 0 ? void 0 : student.salary}</td>
 		<td>${student === null || student === void 0 ? void 0 : student.familyStatus}</td>
 		<td class="">
-			<button
-				data-bs-toggle="modal"
-				data-bs-target="#updateModal"
-				class="btn btn-warning btn-sm"
-				onclick="updateStudent(${index})">
-				📝
-			</button>
+			
 			<button
 				class="btn btn-danger btn-sm"
 				onclick="deleteStudent(${index})">
@@ -130,28 +123,60 @@ function mapStudentsToTable(students) {
     });
 }
 // 5. Search, Filter, and Sort Functions (Implementation Examples):
-function searchStudents() {
-    let searchTerm = document.getElementById("search")
-        .value;
+// SEARCH BAR FUNCTION
+const search = document.getElementById("search");
+search.addEventListener("input", (e) => {
+    const target = e.target;
+    const value = target.value.toLowerCase(); // Search term in lowercase
     const students = getStudentsFromStorage();
     const filteredStudents = students.filter((student) => {
-        const fullName = student.firstName + " " + student.lastName;
-        return fullName.toLowerCase().includes(searchTerm.toLowerCase());
+        var _a;
+        const fullName = (_a = ((student === null || student === void 0 ? void 0 : student.firstName) +
+            " " +
+            (student === null || student === void 0 ? void 0 : student.lastName) +
+            " " +
+            (student === null || student === void 0 ? void 0 : student.address) +
+            " " +
+            (student === null || student === void 0 ? void 0 : student.familyStatus) +
+            " " +
+            (student === null || student === void 0 ? void 0 : student.birthDate))) === null || _a === void 0 ? void 0 : _a.toLowerCase();
+        return fullName === null || fullName === void 0 ? void 0 : fullName.includes(value); // Check for case-insensitive inclusion
     });
-    mapStudentsToTable(filteredStudents);
-}
-const search = document.getElementById("search");
-search.addEventListener("change", () => searchStudents());
-function filterStudentsByPosition(position) {
-    const students = getStudentsFromStorage();
-    const filteredStudents = students.filter((student) => student.position === position);
-    mapStudentsToTable(filteredStudents);
-}
-function filterStudentsByLevel(level) {
-    const students = getStudentsFromStorage();
-    const filteredStudents = students.filter((student) => student.level === level);
-    mapStudentsToTable(filteredStudents);
-}
+    mapStudentsToTable(filteredStudents); // Map only filtered students
+});
+// FILTER FUNCTION
+// Filter by Position
+// const selectPosition = document.getElementById(
+// 	"selectPosition"
+//   ) as HTMLSelectElement;
+//   selectPosition.addEventListener("input", (e: Event) => {
+// 	const target = e.target as HTMLSelectElement;
+// 	const position = target.value;
+// 	const students = getStudentsFromStorage();
+// 	let filteredStudents: Student[] = [];
+// 	if (position === "Job position") {  // Check for empty value (All Positions)
+// 	  filteredStudents = students;
+// 	} else {
+// 	  filteredStudents = students.filter(
+// 		(student) => student?.position === position
+// 	  );
+// 	}
+// 	if (filteredStudents.length === 0) {
+// 	  // Handle empty results (e.g., display a message)
+// 	  console.log("No students found matching the selected position.");
+// 	  // You can also modify the table to display a message here
+// 	} else {
+// 	  mapStudentsToTable(filteredStudents);  // Only map if students found
+// 	}
+//   });
+// function filterStudentsByLevel(level: string) {
+// 	const students = getStudentsFromStorage();
+// 	const filteredStudents = students.filter(
+// 		(student) => student.level === level
+// 	);
+// 	mapStudentsToTable(filteredStudents);
+// }
+// SORT FUNCTION
 const descOption = document.getElementById("desc");
 const ascOption = document.getElementById("asc");
 descOption.addEventListener("click", () => sortStudentsBySalary("desc"));
