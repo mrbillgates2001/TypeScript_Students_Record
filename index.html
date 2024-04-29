@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./style/bootstrap.min.css" />
+		<link rel="stylesheet" href="./style/style.css" />
+		<title>Students Record</title>
+	</head>
+	<body>
+		<header>
+			<div class="container">
+				<div class="header-content">
+					<nav class="input-group">
+						<input
+							id="search"
+							type="search"
+							class="form-control"
+							placeholder="Search..."
+							style="width: 400px" />
+						<select name="" id="" class="form-select bg-warning-subtle">
+							<option value="position">Job position</option>
+							<option value="position">React JS Developr</option>
+							<option value="position">Go Developer</option>
+							<option value="position">React Native Developer</option>
+						</select>
+						<select name="" id="" class="form-select bg-primary-subtle">
+							<option value="department">Family status</option>
+							<option value="married">Married</option>
+							<option value="unmarried">Single</option>
+						</select>
+						<button
+							type="button"
+							class="btn btn-success"
+							data-bs-toggle="modal"
+							data-bs-target="#exampleModal">
+							Add +
+						</button>
+					</nav>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<div class="container">
+				<div class="table-responsive">
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Firstname</th>
+								<th scope="col">Lastname</th>
+								<th scope="col">Address</th>
+								<th scope="col">Birthdate</th>
+								<th scope="col">Position</th>
+								<th scope="col">Level</th>
+								<th scope="col">
+									<div class="dropdown">
+										<span
+											class="dropdown-toggle"
+											data-bs-toggle="dropdown"
+											aria-expanded="false">
+											Salary
+										</span>
+										<ul class="dropdown-menu">
+											<li>
+												<button class="dropdown-item" id="desc">
+													Low to High
+												</button>
+											</li>
+											<li>
+												<button class="dropdown-item" id="asc">
+													High to Low
+												</button>
+											</li>
+										</ul>
+									</div>
+								</th>
+								<th scope="col">Family status</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody id="student-table-body">
+							<!-- TABLE DATA -->
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Modal for ADD -->
+				<div
+					class="modal fade"
+					id="exampleModal"
+					tabindex="-1"
+					aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content" style="width: 500px">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="exampleModalLabel">
+									Add a new student
+								</h1>
+								<button
+									type="button"
+									class="btn-close"
+									data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<form id="formCreate" class="g-3 needs-validation" novalidate>
+									<div class="col-100 p-1">
+										<label for="firstNameInput" class="form-label"
+											>Firstname</label
+										>
+										<input
+											type="text"
+											class="form-control"
+											id="firstNameInput"
+											required />
+										<div class="valid-feedback">Looks good!</div>
+										<div class="invalid-feedback">
+											Please input a firstname.
+										</div>
+									</div>
+									<div class="col-100 p-1">
+										<label for="lastNameInput" class="form-label"
+											>Lastname</label
+										>
+										<input
+											type="text"
+											class="form-control"
+											id="lastNameInput"
+											required />
+										<div class="valid-feedback">Looks good!</div>
+
+										<div class="invalid-feedback">Please input a lastname.</div>
+									</div>
+
+									<div class="col-100 p-1">
+										<label for="addressInput" class="form-label">Address</label>
+										<input
+											type="text"
+											class="form-control"
+											id="addressInput"
+											required />
+										<div class="invalid-feedback">
+											Please provide a valid city.
+										</div>
+									</div>
+
+									<div class="col-100 p-1">
+										<label for="birthDateInput" class="form-label"
+											>Birthdate</label
+										>
+										<input
+											type="date"
+											class="form-control"
+											id="birthDateInput"
+											required />
+										<div class="invalid-feedback">
+											Please provide a valid date.
+										</div>
+									</div>
+
+									<div class="col-100 p-1">
+										<label for="positionInput" class="form-label"
+											>Position</label
+										>
+										<select class="form-select" id="positionInput" required>
+											<option selected disabled value="">Choose...</option>
+											<option>React JS Developer</option>
+											<option>Go Developer</option>
+											<option>Flutter Developer</option>
+											<option>Swift Developer</option>
+											<option>Pyton Developer</option>
+											<option>Angular Developer</option>
+										</select>
+										<div class="invalid-feedback">
+											Please select a valid position.
+										</div>
+									</div>
+									<div class="col-100 p-1">
+										<label for="levelInput" class="form-label">Level</label>
+										<select class="form-select" id="levelInput" required>
+											<option selected disabled value="">Choose...</option>
+											<option>Junior</option>
+											<option>Middle</option>
+											<option>Senior</option>
+										</select>
+										<div class="invalid-feedback">
+											Please select a valid level.
+										</div>
+									</div>
+									<div class="col-100 p-1">
+										<label for="salaryInput" class="form-label">Salary</label>
+										<div class="input-group has-validation">
+											<span class="input-group-text" id="inputGroupPrepend"
+												>$</span
+											>
+											<input
+												type="text"
+												class="form-control"
+												id="salaryInput"
+												aria-describedby="inputGroupPrepend"
+												required />
+											<div class="invalid-feedback">Please input a salary.</div>
+										</div>
+									</div>
+									<div class="col-100 p-1">
+										<label for="familyStatusInput" class="form-label"
+											>Family Status</label
+										>
+										<select class="form-select" id="familyStatusInput" required>
+											<option selected disabled value="">Choose...</option>
+											<option>Married</option>
+											<option>Single</option>
+										</select>
+										<div class="invalid-feedback">
+											Please select a valid level.
+										</div>
+									</div>
+									<div class="col-12 p-1">
+										<div class="form-check">
+											<input
+												class="form-check-input"
+												type="checkbox"
+												value=""
+												id="invalidCheck"
+												required />
+											<label class="form-check-label" for="invalidCheck">
+												Agree to terms and conditions
+											</label>
+											<div class="invalid-feedback">
+												You must agree before submitting.
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button
+											type="button"
+											class="btn btn-secondary"
+											data-bs-dismiss="modal">
+											Close
+										</button>
+										<button type="submit" class="btn btn-primary">
+											Save changes
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal for UPDATE -->
+				<div
+					class="modal fade"
+					id="updateModal"
+					tabindex="-1"
+					aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content" style="width: 500px">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="exampleModalLabel">
+									Update student
+								</h1>
+								<button
+									type="button"
+									class="btn-close"
+									data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<form id="formUpdate" class="g-3 needs-validation" novalidate>
+									<div class="col-100 p-1">
+										<label for="firstNameInput" class="form-label"
+											>Firstname</label
+										>
+										<input
+											type="text"
+											class="form-control"
+											id="firstNameInput"
+											required />
+										<div class="valid-feedback">Looks good!</div>
+										<div class="invalid-feedback">
+											Please input a firstname.
+										</div>
+									</div>
+									<div class="col-100 p-1">
+										<label for="lastNameInput" class="form-label"
+											>Lastname</label
+										>
+										<input
+											type="text"
+											class="form-control"
+											id="lastNameInput"
+											required />
+										<div class="valid-feedback">Looks good!</div>
+
+										<div class="invalid-feedback">Please input a lastname.</div>
+									</div>
+
+									<div class="col-100 p-1">
+										<label for="addressInput" class="form-label">Address</label>
+										<input
+											type="text"
+											class="form-control"
+											id="addressInput"
+											required />
+										<div class="invalid-feedback">
+											Please provide a valid city.
+										</div>
+									</div>
+
+									<div class="col-100 p-1">
+										<label for="birthDateInput" class="form-label"
+											>Birthdate</label
+										>
+										<input
+											type="date"
+											class="form-control"
+											id="birthDateInput"
+											required />
+										<div class="invalid-feedback">
+											Please provide a valid date.
+										</div>
+									</div>
+
+									<div class="col-100 p-1">
+										<label for="positionInput" class="form-label"
+											>Position</label
+										>
+										<select class="form-select" id="positionInput" required>
+											<option selected disabled value="">Choose...</option>
+											<option>React JS Developer</option>
+											<option>Go Developer</option>
+											<option>Flutter Developer</option>
+											<option>Swift Developer</option>
+											<option>Pyton Developer</option>
+											<option>Angular Developer</option>
+										</select>
+										<div class="invalid-feedback">
+											Please select a valid position.
+										</div>
+									</div>
+									<div class="col-100 p-1">
+										<label for="levelInput" class="form-label">Level</label>
+										<select class="form-select" id="levelInput" required>
+											<option selected disabled value="">Choose...</option>
+											<option>Junior</option>
+											<option>Middle</option>
+											<option>Senior</option>
+										</select>
+										<div class="invalid-feedback">
+											Please select a valid level.
+										</div>
+									</div>
+									<div class="col-100 p-1">
+										<label for="salaryInput" class="form-label">Salary</label>
+										<div class="input-group has-validation">
+											<span class="input-group-text" id="inputGroupPrepend"
+												>$</span
+											>
+											<input
+												type="text"
+												class="form-control"
+												id="salaryInput"
+												aria-describedby="inputGroupPrepend"
+												required />
+											<div class="invalid-feedback">Please input a salary.</div>
+										</div>
+									</div>
+									<div class="col-100 p-1">
+										<label for="familyStatusInput" class="form-label"
+											>Family Status</label
+										>
+										<select class="form-select" id="familyStatusInput" required>
+											<option selected disabled value="">Choose...</option>
+											<option>Married</option>
+											<option>Single</option>
+										</select>
+										<div class="invalid-feedback">
+											Please select a valid level.
+										</div>
+									</div>
+									<div class="col-12 p-1">
+										<div class="form-check">
+											<input
+												class="form-check-input"
+												type="checkbox"
+												value=""
+												id="invalidCheck"
+												required />
+											<label class="form-check-label" for="invalidCheck">
+												Agree to terms and conditions
+											</label>
+											<div class="invalid-feedback">
+												You must agree before submitting.
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button
+											type="button"
+											class="btn btn-secondary"
+											data-bs-dismiss="modal">
+											Close
+										</button>
+										<button type="submit" class="btn btn-primary">
+											Save changes
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer></footer>
+
+		<script src="./dist/main.js"></script>
+		<script src="./dist/bootstrap.min.js"></script>
+		<script src="./dist/bootstrap.bundle.min.js"></script>
+	</body>
+</html>
